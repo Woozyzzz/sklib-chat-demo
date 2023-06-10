@@ -1,6 +1,10 @@
 @import "./helper.scss";
 
 $header-height: 48px;
+$color-basic-white: #fff;
+$color-primary: #4a76da;
+$color-primary-activated: #3863c6;
+$color-level-1-border: #dcdfe6;
 
 html {
   font-size: small;
@@ -15,7 +19,7 @@ html {
   height: $header-height;
   font-family: $font-hei;
   background-image: url("../images/background-header.png");
-  background-position: center;
+  background-position: bottom left;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: darkblue;
@@ -37,7 +41,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #eee;
+    color: $color-basic-white;
     background-image: url("../images/user.svg");
     background-position: left;
     background-size: 16px;
@@ -53,13 +57,149 @@ html {
       cursor: pointer;
 
       &:nth-child(2) {
-        border-left: 1px solid #eee;
+        border-left: 1px solid $color-basic-white;
       }
     }
   }
 }
 
 .main {
+  display: flex;
+  justify-content: space-between;
   height: calc(100vh - $header-height);
-  background-color: aliceblue;
+  background-image: url("../images/background-main.png");
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .main__aside {
+    padding: 16px 32px;
+    padding-bottom: 0;
+    width: 300px;
+    min-width: 300px;
+
+    .aside__form {
+      .form__new-chat-button {
+        position: relative;
+        margin: 24px 0;
+        padding: 8px 0;
+        text-align: center;
+        color: $color-basic-white;
+        border-radius: 8px;
+        background-color: $color-primary;
+        -webkit-box-shadow: inset 0px 0px 8px 0px rgba(255, 255, 255, 1);
+        -moz-box-shadow: inset 0px 0px 8px 0px rgba(255, 255, 255, 1);
+        box-shadow: inset 0px 0px 8px 0px rgba(255, 255, 255, 1);
+        cursor: pointer;
+        transition: ease background-color 0.3s;
+
+        &:hover {
+          background-color: $color-primary-activated;
+        }
+
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: 80px;
+          display: block;
+          width: 10px;
+          height: 2px;
+          background-color: $color-basic-white;
+          content: "";
+          transform: translateY(-50%);
+        }
+
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: 84px;
+          display: block;
+          width: 2px;
+          height: 10px;
+          background-color: $color-basic-white;
+          content: "";
+          transform: translateY(-50%);
+        }
+      }
+
+      .form__query-history {
+        position: relative;
+
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: 16px;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-image: url("../images/search.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+          content: "";
+          transform: translateY(-50%);
+        }
+      }
+
+      .query-history__input {
+        padding: 8px;
+        padding-left: 36px;
+        width: 100%;
+        border-radius: 8px;
+        border-color: $color-basic-white;
+        border-style: solid;
+        background-color: rgba(255, 255, 255, 0.8);
+        outline: none;
+        transition: ease border-color 0.3s;
+
+        &:focus {
+          border-color: $color-primary;
+        }
+      }
+    }
+
+    .aside__list {
+      margin-top: 24px;
+      height: calc(100vh - 240px);
+      overflow: auto;
+
+      .list-item {
+        position: relative;
+        padding-left: 24px;
+        display: -webkit-box;
+        overflow: hidden;
+        line-height: 48px;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        border-radius: 4px;
+        border-bottom: 1px solid $color-level-1-border;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(82, 119, 211, 0.2);
+        }
+
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: 4px;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-image: url("../images/chat.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+          content: "";
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+
+  .main__main {
+    flex-grow: 1;
+    // background-color: #000;
+  }
 }
