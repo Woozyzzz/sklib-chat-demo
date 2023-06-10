@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "serve": "parcel src/index.html --dist-dir .dist-cache",
+    "build": "parcel build src/index.html --public-url ./"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.9.2",
+    "parcel": "^2.9.2"
+  }
+}

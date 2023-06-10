@@ -1,0 +1,4 @@
+# Dependency directories
+.dist-cache
+.parcel-cache
+node_modules
