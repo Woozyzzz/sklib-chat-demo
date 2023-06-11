@@ -273,6 +273,7 @@ html {
         .section__content {
           position: relative;
           width: 100%;
+          line-height: 1.8em;
           border-radius: 8px;
           box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
           background-color: $color-basic-white;
@@ -290,6 +291,10 @@ html {
             &.more {
               margin-bottom: 48px;
               max-height: 240px;
+
+              &.expanded {
+                max-height: none;
+              }
             }
           }
 
@@ -299,6 +304,12 @@ html {
             right: 32px;
             color: $color-primary;
             cursor: pointer;
+
+            &.expanded {
+              &::before {
+                transform: translate(-50%, -50%) rotate(180deg);
+              }
+            }
 
             &::before {
               position: absolute;

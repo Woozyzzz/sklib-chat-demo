@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "serve": "parcel src/index.html --dist-dir .dist-cache",
-    "build": "parcel build src/index.html --public-url ./"
+    "serve": "cp -r public .dist-cache && parcel src/index.html --dist-dir .dist-cache",
+    "build": "parcel build src/index.html --public-url ./ && cp -r public dist",
+    "copy": "cp -r public .dist-cache"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.9.2",
