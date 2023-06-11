@@ -1,0 +1,2 @@
+@media screen and (width<=500px){.header{min-width:320px}.header .header__user{background-image:none}.header .header__user .user__menu{visibility:visible}.main{min-width:320px}.main .main__aside{visibility:hidden;width:0;min-width:0;padding:0;transition:width .3s,min-width .3s}.main .main__aside.visible{visibility:visible;width:300px;min-width:300px;padding:16px 32px 0}.main .main__aside.visible .aside__form .form__query-history:before{display:block}.main .main__aside .aside__form .form__query-history:before{display:none}}
+/*# sourceMappingURL=index.7c3f77e8.css.map */
