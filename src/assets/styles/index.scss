@@ -4,10 +4,14 @@ $header-height: 48px;
 $color-basic-white: #fff;
 $color-primary: #4a76da;
 $color-primary-activated: #3863c6;
+$color-primary-light: #bdcce9;
 $color-level-1-border: #dcdfe6;
+$color-primary-text: #303133;
 
 html {
   font-size: small;
+  background-color: #ecf5fe;
+  color: $color-primary-text;
 }
 
 .header {
@@ -15,14 +19,14 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 320px;
+  min-width: 352px;
   height: $header-height;
   font-family: $font-hei;
   background-image: url("../images/background-header.png");
   background-position: bottom left;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: darkblue;
+  background-color: #0a2556;
 
   .header__anchor {
     height: 100%;
@@ -205,13 +209,117 @@ html {
     flex-grow: 1;
 
     .main__article {
+      padding: 48px 16px;
       flex-grow: 1;
-      background: #eee;
+      overflow: auto;
+
+      .article__section {
+        margin: 0 auto;
+        margin-bottom: 32px;
+        width: 80%;
+        min-width: 320px;
+        display: flex;
+        justify-content: space-between;
+
+        &.user {
+          .section__profile {
+            background: $color-primary-light;
+
+            &::before {
+              background-image: url("../images/profile.svg");
+            }
+          }
+
+          .section__content {
+            padding: 8px;
+            color: $color-primary;
+            box-shadow: none;
+            background-color: transparent;
+            background-image: none;
+          }
+        }
+
+        .section__profile {
+          position: relative;
+          margin-right: 8px;
+          width: 32px;
+          min-width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgb(63, 94, 251);
+          background: linear-gradient(
+            0deg,
+            rgba(63, 94, 251, 1) 30%,
+            rgba(252, 70, 70, 1) 100%
+          );
+
+          &::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 32px;
+            height: 32px;
+            background-image: url("../images/logo.svg");
+            background-position: center;
+            background-size: 80%;
+            background-repeat: no-repeat;
+            content: "";
+            transform: translate(-50%, -50%);
+          }
+        }
+
+        .section__content {
+          position: relative;
+          width: 100%;
+          border-radius: 8px;
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          background-color: $color-basic-white;
+          background-image: url("../images/background-content.png");
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+
+          .content__text {
+            margin: 16px 24px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            overflow: hidden;
+
+            &.more {
+              margin-bottom: 48px;
+              max-height: 240px;
+            }
+          }
+
+          .content__more-button {
+            position: absolute;
+            bottom: 16px;
+            right: 32px;
+            color: $color-primary;
+            cursor: pointer;
+
+            &::before {
+              position: absolute;
+              top: 50%;
+              left: -10px;
+              width: 14px;
+              height: 14px;
+              background-image: url("../images/expansion.svg");
+              background-position: center;
+              background-size: cover;
+              background-repeat: no-repeat;
+              content: "";
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
     }
 
     .main__form {
       padding: 16px;
       height: 160px;
+      min-height: 160px;
 
       .form__question {
         position: relative;
@@ -241,7 +349,6 @@ html {
           border-radius: 8px;
           border-color: $color-basic-white;
           border-style: solid;
-          background-color: rgba(255, 255, 255, 0.4);
           -webkit-box-shadow: 0px 6px 20px -4px rgba(74, 118, 218, 0.8);
           -moz-box-shadow: 0px 6px 20px -4px rgba(74, 118, 218, 0.8);
           box-shadow: 0px 6px 20px -4px rgba(74, 118, 218, 0.8);
