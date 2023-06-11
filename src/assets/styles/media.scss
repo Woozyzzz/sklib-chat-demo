@@ -1,0 +1,49 @@
+@media screen and (max-width: 800px) {
+  .header {
+    min-width: 320px;
+
+    .header__user {
+      background-image: none;
+
+      .user__menu {
+        visibility: visible;
+      }
+    }
+  }
+
+  .main {
+    min-width: 320px;
+
+    .main__aside {
+      padding: 0;
+      width: 0;
+      min-width: 0;
+      visibility: hidden;
+      transition: width 0.3s ease, min-width 0.3s ease;
+
+      &.visible {
+        padding: 16px 32px;
+        padding-bottom: 0;
+        width: 300px;
+        min-width: 300px;
+        visibility: visible;
+
+        .aside__form {
+          .form__query-history {
+            &::before {
+              display: block;
+            }
+          }
+        }
+      }
+
+      .aside__form {
+        .form__query-history {
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

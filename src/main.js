@@ -1,6 +1,8 @@
 const el = (selector) => document.querySelector(selector);
 
 // 元素
+const elUserMenu = el(`.user__menu`);
+const elMainAside = el(`.main__aside`);
 const elFormNewChatButton = el(`.form__new-chat-button`);
 const elAsideList = el(`.aside__list`);
 const elMainArticle = el(`.main__article`);
@@ -27,6 +29,13 @@ const onClickQuestionSubmitButton = () => {
 };
 
 // 监听器
+elUserMenu.addEventListener("click", () => {
+  if ([...elMainAside.classList].includes("visible")) {
+    elMainAside.classList.remove("visible");
+  } else {
+    elMainAside.classList.add("visible");
+  }
+});
 elFormNewChatButton.addEventListener("click", () => {
   elMainArticle.innerHTML = "";
   elQuestionTextarea.focus();

@@ -47,9 +47,15 @@ html {
     align-items: center;
     color: $color-basic-white;
     background-image: url("../images/user.svg");
-    background-position: left;
+    background-position: 42px;
     background-size: 16px;
     background-repeat: no-repeat;
+
+    .user__menu {
+      padding: 0 8px;
+      cursor: pointer;
+      visibility: hidden;
+    }
 
     .user__sign-in {
       padding: 0 8px;
@@ -59,10 +65,6 @@ html {
     .user__login {
       padding: 0 8px;
       cursor: pointer;
-
-      &:nth-child(2) {
-        border-left: 1px solid $color-basic-white;
-      }
     }
   }
 }
@@ -221,7 +223,6 @@ html {
         width: 80%;
         min-width: 320px;
         display: flex;
-        justify-content: space-between;
 
         &.user {
           .section__profile {
