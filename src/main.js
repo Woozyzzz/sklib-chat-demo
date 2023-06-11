@@ -7,6 +7,25 @@ const elMainArticle = el(`.main__article`);
 const elQuestionTextarea = el(`.question__textarea`);
 const elQuestionSubmitButton = el(`.question__submit-button`);
 
+// 事件处理
+const onClickQuestionSubmitButton = () => {
+  currentChatHistoryList.push({ role: 1, content: elQuestionTextarea.value });
+  renderCurrentChatHistoryList([
+    { role: 1, content: elQuestionTextarea.value },
+  ]);
+  elQuestionTextarea.value = "";
+  elMainArticle.scrollTop = elMainArticle.scrollHeight;
+  setTimeout(() => {
+    currentChatHistoryList.push({
+      role: 2,
+      content: "抱歉我没有理解您的问题。",
+    });
+    renderCurrentChatHistoryList([
+      { role: 2, content: "抱歉我没有理解您的问题。" },
+    ]);
+  }, 1000);
+};
+
 // 监听器
 elFormNewChatButton.addEventListener("click", () => {
   elMainArticle.innerHTML = "";
@@ -42,9 +61,7 @@ elMainArticle.addEventListener("click", (event) => {
     target.previousSibling.classList.add("expanded");
   }
 });
-elQuestionSubmitButton.addEventListener("click", () => {
-  console.log(elQuestionTextarea.value);
-});
+elQuestionSubmitButton.addEventListener("click", onClickQuestionSubmitButton);
 
 // 数据
 let currentTitleHistoryList = [];
@@ -69,7 +86,7 @@ const fetchChatHistoryList = async () => {
       throw error;
     });
   currentChatHistoryList = Array.isArray(data) ? data : [];
-  renderCurrentChatHistoryList();
+  renderCurrentChatHistoryList(currentChatHistoryList);
 };
 
 // 数据处理方法
@@ -113,10 +130,10 @@ const renderCurrentTitleHistoryList = () => {
     elAsideList.appendChild(element);
   }
 };
-const renderCurrentChatHistoryList = () => {
+const renderCurrentChatHistoryList = (chatHistoryList) => {
   const treeData =
-    currentChatHistoryList.map((currentChatHistoryItem) => {
-      const { role, content } = currentChatHistoryItem;
+    chatHistoryList.map((chatHistoryItem) => {
+      const { role, content } = chatHistoryItem;
       const userValue = {
         tag: "section",
         classList: ["article__section", "user"],
