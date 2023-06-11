@@ -19,7 +19,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 352px;
+  min-width: 1200px;
   height: $header-height;
   font-family: $font-hei;
   background-image: url("../images/background-header.png");
@@ -70,6 +70,7 @@ html {
 .main {
   display: flex;
   justify-content: space-between;
+  min-width: 1200px;
   height: calc(100vh - $header-height);
   background-image: url("../images/background-main.png");
   background-position: top left;
