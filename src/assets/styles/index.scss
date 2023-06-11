@@ -9,6 +9,7 @@ $color-level-1-border: #dcdfe6;
 $color-primary-text: #303133;
 
 html {
+  --vh: 1vh;
   font-size: small;
   background-color: #ecf5fe;
   color: $color-primary-text;
@@ -74,6 +75,7 @@ html {
   justify-content: space-between;
   min-width: 1200px;
   height: calc(100vh - $header-height);
+  height: calc(var(--vh) * 100 - $header-height);
   background-image: url("../images/background-main.png");
   background-position: top left;
   background-size: cover;
@@ -169,6 +171,7 @@ html {
     .aside__list {
       margin-top: 32px;
       height: calc(100vh - 300px);
+      height: calc(var(--vh) * 100 - 300px);
       overflow: auto;
 
       .list-item {

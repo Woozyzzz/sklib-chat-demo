@@ -29,6 +29,10 @@ const onClickQuestionSubmitButton = () => {
 };
 
 // 监听器
+window.addEventListener("resize", () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+});
 elUserMenu.addEventListener("click", () => {
   if ([...elMainAside.classList].includes("visible")) {
     elMainAside.classList.remove("visible");
@@ -211,6 +215,8 @@ const renderCurrentChatHistoryList = (chatHistoryList) => {
 
 // 主函数
 const main = async () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
   await fetchTitleHistoryList().catch((error) => {
     throw error;
   });
