@@ -174,6 +174,7 @@ html {
         padding-left: 24px;
         display: -webkit-box;
         overflow: hidden;
+        height: 48px;
         line-height: 48px;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
@@ -188,7 +189,7 @@ html {
 
         &::before {
           position: absolute;
-          top: 50%;
+          top: 26px;
           left: 4px;
           display: block;
           width: 16px;
@@ -282,9 +283,9 @@ html {
 
           .content__text {
             margin: 16px 24px;
+            overflow: hidden;
             word-wrap: break-word;
             white-space: pre-wrap;
-            overflow: hidden;
 
             &.more {
               margin-bottom: 48px;
