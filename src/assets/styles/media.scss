@@ -27,22 +27,6 @@
         width: 300px;
         min-width: 300px;
         visibility: visible;
-
-        .aside__form {
-          .form__query-history {
-            &::before {
-              display: block;
-            }
-          }
-        }
-      }
-
-      .aside__form {
-        .form__query-history {
-          &::before {
-            display: none;
-          }
-        }
       }
     }
   }

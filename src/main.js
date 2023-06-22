@@ -3,7 +3,7 @@ const el = (selector) => document.querySelector(selector);
 // 元素
 const elUserMenu = el(`.user__menu`);
 const elMainAside = el(`.main__aside`);
-const elFormNewChatButton = el(`.form__new-chat-button`);
+const elFormNewChatButton = el(`.aside__new-chat-button`);
 const elAsideList = el(`.aside__list`);
 const elMainArticle = el(`.main__article`);
 const elQuestionTextarea = el(`.question__textarea`);
@@ -47,10 +47,19 @@ elFormNewChatButton.addEventListener("click", () => {
 elAsideList.addEventListener("click", async (event) => {
   const {
     target: { className },
+    target,
   } = event;
-  if (className !== "list-item") {
+  if (!["list-item", "list-item__text"].includes(className)) {
     return;
   }
+  const elListItemList = elAsideList.children;
+  for (const elListItem of elListItemList) {
+    elListItem.classList.remove("active");
+  }
+  const currentElListItem = className.includes("list-item__text")
+    ? target.parentNode
+    : target;
+  currentElListItem.classList.add("active");
   elMainArticle.innerHTML = "";
   await fetchChatHistoryList().catch((error) => {
     throw error;
@@ -134,7 +143,20 @@ const renderCurrentTitleHistoryList = () => {
       const titleValue = {
         tag: "li",
         classList: ["list-item"],
-        text: content,
+        children: [
+          { tag: "p", classList: ["list-item__text"], text: content },
+          {
+            tag: "div",
+            classList: ["list-item__button-wrapper"],
+            children: [
+              { tag: "div", classList: ["button-wrapper__download"] },
+              {
+                tag: "div",
+                classList: ["button-wrapper__delete"],
+              },
+            ],
+          },
+        ],
       };
       return titleValue;
     }) || [];
