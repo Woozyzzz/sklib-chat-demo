@@ -7,12 +7,11 @@ $color-primary: #4a76da;
 $color-primary-activated: #3863c6;
 $color-primary-light: #bdcce9;
 $color-level-1-border: #4f4f4f;
-$color-primary-text: #303133;
+$color-primary-text: #4f4f4f;
 
 html {
   --vh: 1vh;
-  font-size: small;
-  background-color: #ecf5fe;
+  font-size: 16px;
   color: $color-primary-text;
 }
 
@@ -71,16 +70,13 @@ html {
   min-width: 1200px;
   height: calc(100vh - $header-height);
   height: calc(var(--vh) * 100 - $header-height);
-  background-image: url("../images/background-main.png");
-  background-position: top left;
-  background-size: cover;
-  background-repeat: no-repeat;
 
   .main__aside {
     padding: 16px 8px;
     padding-bottom: 0;
     width: 260px;
     min-width: 260px;
+    font-size: 14px;
     background-color: $color-basic-black;
 
     .aside__new-chat-button {
@@ -203,118 +199,46 @@ html {
     flex-grow: 1;
 
     .main__article {
-      padding: 48px 16px;
       flex-grow: 1;
       overflow: auto;
 
       .article__section {
-        margin: 0 auto;
-        margin-bottom: 32px;
-        width: 80%;
-        min-width: 320px;
+        padding: 24px 0;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        background-color: #f7f7f8;
 
         &.user {
-          .section__profile {
-            background: $color-primary-light;
+          border: none;
+          background-color: $color-basic-white;
 
-            &::before {
-              background-image: url("../images/profile.svg");
+          .section__content-wrapper {
+            .content-wrapper__profile {
+              background-image: url("../images/profile-plain.png");
             }
-          }
-
-          .section__content {
-            padding: 8px;
-            color: $color-primary;
-            box-shadow: none;
-            background-color: transparent;
-            background-image: none;
           }
         }
 
-        .section__profile {
-          position: relative;
-          margin-right: 8px;
-          width: 32px;
-          min-width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: rgb(63, 94, 251);
-          background: linear-gradient(
-            0deg,
-            rgba(63, 94, 251, 1) 30%,
-            rgba(252, 70, 70, 1) 100%
-          );
+        .section__content-wrapper {
+          display: flex;
+          width: 60%;
 
-          &::before {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+          .content-wrapper__profile {
+            margin-right: 16px;
             width: 32px;
+            min-width: 32px;
             height: 32px;
-            background-image: url("../images/logo.svg");
+            background-image: url("../images/profile-chat.png");
             background-position: center;
             background-size: 80%;
             background-repeat: no-repeat;
-            content: "";
-            transform: translate(-50%, -50%);
-          }
-        }
-
-        .section__content {
-          position: relative;
-          width: 100%;
-          line-height: 1.8em;
-          border-radius: 8px;
-          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-          background-color: $color-basic-white;
-          background-image: url("../images/background-content.png");
-          background-position: center;
-          background-size: cover;
-          background-repeat: no-repeat;
-
-          .content__text {
-            margin: 16px 24px;
-            overflow: hidden;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-
-            &.more {
-              margin-bottom: 48px;
-              max-height: 240px;
-
-              &.expanded {
-                max-height: none;
-              }
-            }
           }
 
-          .content__more-button {
-            position: absolute;
-            bottom: 16px;
-            right: 32px;
-            color: $color-primary;
-            cursor: pointer;
-
-            &.expanded {
-              &::before {
-                transform: translate(-50%, -50%) rotate(180deg);
-              }
-            }
-
-            &::before {
-              position: absolute;
-              top: 50%;
-              left: -10px;
-              width: 14px;
-              height: 14px;
-              background-image: url("../images/expansion.svg");
-              background-position: center;
-              background-size: cover;
-              background-repeat: no-repeat;
-              content: "";
-              transform: translate(-50%, -50%);
-            }
+          .content-wrapper__content {
+            padding: 4px 0;
           }
         }
       }

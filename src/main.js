@@ -65,24 +65,6 @@ elAsideList.addEventListener("click", async (event) => {
     throw error;
   });
 });
-elMainArticle.addEventListener("click", (event) => {
-  const {
-    target: { className },
-    target,
-  } = event;
-  if (!className.includes("content__more-button")) {
-    return;
-  }
-  if (className.includes("expanded")) {
-    target.innerHTML = "展开更多";
-    target.classList.remove("expanded");
-    target.previousSibling.classList.remove("expanded");
-  } else {
-    target.innerHTML = "收起更多";
-    target.classList.add("expanded");
-    target.previousSibling.classList.add("expanded");
-  }
-});
 elQuestionSubmitButton.addEventListener("click", onClickQuestionSubmitButton);
 
 // 数据
@@ -173,58 +155,38 @@ const renderCurrentChatHistoryList = (chatHistoryList) => {
         tag: "section",
         classList: ["article__section", "user"],
         children: [
-          { tag: "div", classList: ["section__profile"] },
           {
             tag: "div",
-            classList: ["section__content"],
-            text: content,
+            classList: ["section__content-wrapper"],
+            children: [
+              { tag: "div", classList: ["content-wrapper__profile"] },
+              {
+                tag: "div",
+                classList: ["content-wrapper__content"],
+                text: content,
+              },
+            ],
           },
         ],
       };
-      const thresholdContentLength = 500;
-      const chatValue =
-        content.length > thresholdContentLength
-          ? {
-              tag: "section",
-              classList: ["article__section"],
-              children: [
-                { tag: "div", classList: ["section__profile"] },
-                {
-                  tag: "div",
-                  classList: ["section__content"],
-                  children: [
-                    {
-                      tag: "div",
-                      classList: ["content__text", "more"],
-                      text: content,
-                    },
-                    {
-                      tag: "span",
-                      classList: ["content__more-button"],
-                      text: "展开更多",
-                    },
-                  ],
-                },
-              ],
-            }
-          : {
-              tag: "section",
-              classList: ["article__section"],
-              children: [
-                { tag: "div", classList: ["section__profile"] },
-                {
-                  tag: "div",
-                  classList: ["section__content"],
-                  children: [
-                    {
-                      tag: "div",
-                      classList: ["content__text"],
-                      text: content,
-                    },
-                  ],
-                },
-              ],
-            };
+      const chatValue = {
+        tag: "section",
+        classList: ["article__section"],
+        children: [
+          {
+            tag: "div",
+            classList: ["section__content-wrapper"],
+            children: [
+              { tag: "div", classList: ["content-wrapper__profile"] },
+              {
+                tag: "div",
+                classList: ["content-wrapper__content"],
+                text: content,
+              },
+            ],
+          },
+        ],
+      };
       const hashMap = new Map().set(1, userValue).set(2, chatValue);
       return hashMap.get(role);
     }) || [];
