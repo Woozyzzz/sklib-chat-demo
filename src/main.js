@@ -106,7 +106,12 @@ const createTreeNode = (node) => {
     }
   }
   if (node.text) {
-    element.textContent = node.text;
+    if (!node.text.includes("```")) {
+      element.textContent = node.text;
+    }
+    const regex = /(```)([\s\S]+?)(```)/g;
+    const replacement = `<pre class="content__code"><code>$2</code></pre>`;
+    element.innerHTML = node.text.replace(regex, replacement);
   }
   if (node.children) {
     for (const childNode of node.children) {

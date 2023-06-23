@@ -10,7 +10,6 @@ $color-level-1-border: #4f4f4f;
 $color-primary-text: #4f4f4f;
 
 html {
-  --vh: 1vh;
   font-size: 16px;
   color: $color-primary-text;
 }
@@ -19,7 +18,6 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 1200px;
   height: $header-height;
   font-family: $font-hei;
 
@@ -67,15 +65,12 @@ html {
 .main {
   display: flex;
   justify-content: space-between;
-  min-width: 1200px;
-  height: calc(100vh - $header-height);
-  height: calc(var(--vh) * 100 - $header-height);
+  height: calc(var(--vh, 1vh) * 100 - $header-height);
 
   .main__aside {
     padding: 16px 8px;
     padding-bottom: 0;
     width: 260px;
-    min-width: 260px;
     font-size: 14px;
     background-color: $color-basic-black;
 
@@ -115,8 +110,7 @@ html {
 
     .aside__list {
       margin-top: 16px;
-      height: calc(100vh - 200px);
-      height: calc(var(--vh) * 100 - 200px);
+      height: calc(var(--vh) * 100 - 280px);
       overflow: auto;
       border-bottom: 1px solid $color-level-1-border;
 
@@ -196,10 +190,10 @@ html {
   .main__main {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex: 1;
 
     .main__article {
-      flex-grow: 1;
+      flex: 1;
       overflow: auto;
 
       .article__section {
@@ -239,6 +233,16 @@ html {
 
           .content-wrapper__content {
             padding: 4px 0;
+            white-space: pre-wrap;
+
+            .content__code {
+              margin: 8px 0;
+              padding: 8px;
+              color: $color-basic-white;
+              white-space: pre-wrap;
+              border-radius: 4px;
+              background-color: #333;
+            }
           }
         }
       }
