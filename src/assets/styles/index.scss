@@ -7,14 +7,14 @@ html {
   color: $color-primary-text;
 }
 
-.header {
+.chat-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: $header-height;
   font-family: $font-hei;
 
-  .header__menu {
+  .chat-header__menu {
     position: relative;
     width: 48px;
     height: 48px;
@@ -24,11 +24,11 @@ html {
     background-repeat: no-repeat;
     cursor: pointer;
 
-    .menu__h1 {
+    .chat-header__menu__h1 {
       display: none;
     }
 
-    .menu__nav {
+    .chat-header__menu__nav {
       position: absolute;
       top: $header-height;
       left: 8px;
@@ -56,7 +56,7 @@ html {
         content: "";
       }
 
-      .nav__list {
+      .chat-header__menu__nav__list {
         max-height: 160px;
         overflow: auto;
         border-bottom: 1px solid $color-level-1-border;
@@ -135,7 +135,7 @@ html {
     }
   }
 
-  .header__new-chat {
+  .chat-header__new-chat {
     width: 48px;
     height: 48px;
     background-image: url("../images/add.png");
@@ -146,21 +146,21 @@ html {
   }
 }
 
-.main {
+.chat-main {
   display: flex;
   justify-content: space-between;
   height: calc(var(--vh, 1vh) * 100 - $header-height);
 
-  .main__aside {
+  .chat-main__aside {
     display: none;
   }
 
-  .main__main {
+  .chat-main__main {
     display: flex;
     flex-direction: column;
     flex: 1;
 
-    .main__article {
+    .chat-main__main__article {
       flex: 1;
       overflow: auto;
       border-top: 1px solid #eee;
@@ -218,11 +218,11 @@ html {
       }
     }
 
-    .main__form {
+    .chat-main__main__form {
       padding: 16px;
       padding-bottom: 24px;
 
-      .form__question {
+      .chat-main__main__form__question {
         position: relative;
         margin: 0 auto;
         width: 90%;
@@ -241,7 +241,7 @@ html {
           content: "";
         }
 
-        .question__textarea {
+        .chat-main__main__form__question__textarea {
           padding: 8px 56px 8px 8px;
           width: 100%;
           border-radius: 8px;

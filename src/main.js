@@ -1,19 +1,19 @@
 const el = (selector) => document.querySelector(selector);
 
 // 元素
-const elHeaderMenu = el(`.header__menu`);
-const elMenuNav = el(`.menu__nav`);
-const elNavList = el(`.nav__list`);
-const elHeaderNewChat = el(`.header__new-chat`);
-const elFormNewChat = el(`.aside__new-chat`);
-const elAsideList = el(`.aside__list`);
-const elMainArticle = el(`.main__article`);
-const elQuestionTextarea = el(`.question__textarea`);
+const elChatHeaderMenu = el(`.chat-header__menu`);
+const elChatHeaderMenuNav = el(`.chat-header__menu__nav`);
+const elChatHeaderMenuNavList = el(`.chat-header__menu__nav__list`);
+const elChatHeaderNewChat = el(`.chat-header__new-chat`);
+const elChatMainAsideNewChat = el(`.chat-main__aside__new-chat`);
+const elChatMainAsideList = el(`.chat-main__aside__list`);
+const elChatMainMainArticle = el(`.chat-main__main__article`);
+const elChatMainMainFormQuestionTextarea = el(`.chat-main__main__form__question__textarea`);
 
 // 事件处理
 const onClickNewChat = () => {
-  elMainArticle.innerHTML = "";
-  elQuestionTextarea.focus();
+  elChatMainMainArticle.innerHTML = "";
+  elChatMainMainFormQuestionTextarea.focus();
 };
 const onClickListItem = async function (event) {
   const {
@@ -31,7 +31,7 @@ const onClickListItem = async function (event) {
     ? target.parentNode
     : target;
   currentElListItem.classList.add("active");
-  elMainArticle.innerHTML = "";
+  elChatMainMainArticle.innerHTML = "";
   await fetchChatHistoryList().catch((error) => {
     throw error;
   });
@@ -41,12 +41,12 @@ const onKeyupQuestionTextarea = (event) => {
   if (!(key === "Enter" && !shiftKey)) {
     return;
   }
-  currentChatHistoryList.push({ role: 1, content: elQuestionTextarea.value });
+  currentChatHistoryList.push({ role: 1, content: elChatMainMainFormQuestionTextarea.value });
   renderCurrentChatHistoryList([
-    { role: 1, content: elQuestionTextarea.value },
+    { role: 1, content: elChatMainMainFormQuestionTextarea.value },
   ]);
-  elQuestionTextarea.value = "";
-  elMainArticle.scrollTop = elMainArticle.scrollHeight;
+  elChatMainMainFormQuestionTextarea.value = "";
+  elChatMainMainArticle.scrollTop = elChatMainMainArticle.scrollHeight;
   setTimeout(() => {
     currentChatHistoryList.push({
       role: 2,
@@ -56,7 +56,7 @@ const onKeyupQuestionTextarea = (event) => {
       { role: 2, content: "抱歉我没有理解您的问题。" },
     ]);
     const top = 99999;
-    elMainArticle.scrollBy({ top });
+    elChatMainMainArticle.scrollBy({ top });
   }, 1000);
 };
 
@@ -66,19 +66,19 @@ window.addEventListener("resize", () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
 
-elHeaderMenu.addEventListener("click", () => {
-  const { classList } = elMenuNav;
+elChatHeaderMenu.addEventListener("click", () => {
+  const { classList } = elChatHeaderMenuNav;
   if ([...classList].includes("visible")) {
-    elMenuNav.classList.remove("visible");
+    elChatHeaderMenuNav.classList.remove("visible");
     return;
   }
-  elMenuNav.classList.add("visible");
+  elChatHeaderMenuNav.classList.add("visible");
 });
-elHeaderNewChat.addEventListener("click", onClickNewChat);
-elFormNewChat.addEventListener("click", onClickNewChat);
-elNavList.addEventListener("click", onClickListItem);
-elAsideList.addEventListener("click", onClickListItem);
-elQuestionTextarea.addEventListener("keyup", onKeyupQuestionTextarea);
+elChatHeaderNewChat.addEventListener("click", onClickNewChat);
+elChatMainAsideNewChat.addEventListener("click", onClickNewChat);
+elChatHeaderMenuNavList.addEventListener("click", onClickListItem);
+elChatMainAsideList.addEventListener("click", onClickListItem);
+elChatMainMainFormQuestionTextarea.addEventListener("keyup", onKeyupQuestionTextarea);
 
 // 数据
 let currentTitleHistoryList = [];
@@ -163,8 +163,8 @@ const renderCurrentTitleHistoryList = () => {
   for (const node of treeData) {
     const element = createTreeNode(node);
     const copyElement = createTreeNode(node);
-    elAsideList.appendChild(element);
-    elNavList.appendChild(copyElement);
+    elChatMainAsideList.appendChild(element);
+    elChatHeaderMenuNavList.appendChild(copyElement);
   }
 };
 const renderCurrentChatHistoryList = (chatHistoryList) => {
@@ -213,7 +213,7 @@ const renderCurrentChatHistoryList = (chatHistoryList) => {
 
   for (const node of treeData) {
     const element = createTreeNode(node);
-    elMainArticle.appendChild(element);
+    elChatMainMainArticle.appendChild(element);
   }
 };
 

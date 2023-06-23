@@ -3,20 +3,20 @@
 @media screen and (min-width: 500px) {
   $header-height: 0px;
 
-  .header {
+  .chat-header {
     height: $header-height;
 
-    .header__menu {
-      .menu__nav {
+    .chat-header__menu {
+      .chat-header__menu__nav {
         display: none;
       }
     }
   }
 
-  .main {
+  .chat-main {
     height: calc(var(--vh, 1vh) * 100 - $header-height);
 
-    .main__aside {
+    .chat-main__aside {
       padding: 16px 8px;
       padding-bottom: 0;
       display: block;
@@ -24,7 +24,7 @@
       font-size: 14px;
       background-color: $color-basic-black;
 
-      .aside__new-chat {
+      .chat-main__aside__new-chat {
         position: relative;
         padding: 14px 0;
         padding-left: 40px;
@@ -58,7 +58,7 @@
         }
       }
 
-      .aside__list {
+      .chat-main__aside__list {
         margin-top: 16px;
         height: calc(var(--vh) * 100 - 280px);
         overflow: auto;
@@ -137,8 +137,8 @@
       }
     }
 
-    .main__main {
-      .main__article {
+    .chat-main__main {
+      .chat-main__main__article {
         border: none;
 
         .article__section {
@@ -150,8 +150,8 @@
         }
       }
 
-      .main__form {
-        .form__question {
+      .chat-main__main__form {
+        .chat-main__main__form__question {
           width: 60%;
         }
       }
