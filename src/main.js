@@ -1,14 +1,41 @@
 const el = (selector) => document.querySelector(selector);
 
 // 元素
-const elUserMenu = el(`.user__menu`);
-const elMainAside = el(`.main__aside`);
-const elFormNewChatButton = el(`.aside__new-chat-button`);
+const elHeaderMenu = el(`.header__menu`);
+const elMenuNav = el(`.menu__nav`);
+const elNavList = el(`.nav__list`);
+const elHeaderNewChat = el(`.header__new-chat`);
+const elFormNewChat = el(`.aside__new-chat`);
 const elAsideList = el(`.aside__list`);
 const elMainArticle = el(`.main__article`);
 const elQuestionTextarea = el(`.question__textarea`);
 
 // 事件处理
+const onClickNewChat = () => {
+  elMainArticle.innerHTML = "";
+  elQuestionTextarea.focus();
+};
+const onClickListItem = async function (event) {
+  const {
+    target: { className },
+    target,
+  } = event;
+  if (!["list-item", "list-item__text"].includes(className)) {
+    return;
+  }
+  const elListItemList = this.children;
+  for (const elListItem of elListItemList) {
+    elListItem.classList.remove("active");
+  }
+  const currentElListItem = className.includes("list-item__text")
+    ? target.parentNode
+    : target;
+  currentElListItem.classList.add("active");
+  elMainArticle.innerHTML = "";
+  await fetchChatHistoryList().catch((error) => {
+    throw error;
+  });
+};
 const onKeyupQuestionTextarea = (event) => {
   const { key, shiftKey } = event;
   if (!(key === "Enter" && !shiftKey)) {
@@ -38,38 +65,19 @@ window.addEventListener("resize", () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
-elUserMenu.addEventListener("click", () => {
-  if ([...elMainAside.classList].includes("visible")) {
-    elMainAside.classList.remove("visible");
-  } else {
-    elMainAside.classList.add("visible");
-  }
-});
-elFormNewChatButton.addEventListener("click", () => {
-  elMainArticle.innerHTML = "";
-  elQuestionTextarea.focus();
-});
-elAsideList.addEventListener("click", async (event) => {
-  const {
-    target: { className },
-    target,
-  } = event;
-  if (!["list-item", "list-item__text"].includes(className)) {
+
+elHeaderMenu.addEventListener("click", () => {
+  const { classList } = elMenuNav;
+  if ([...classList].includes("visible")) {
+    elMenuNav.classList.remove("visible");
     return;
   }
-  const elListItemList = elAsideList.children;
-  for (const elListItem of elListItemList) {
-    elListItem.classList.remove("active");
-  }
-  const currentElListItem = className.includes("list-item__text")
-    ? target.parentNode
-    : target;
-  currentElListItem.classList.add("active");
-  elMainArticle.innerHTML = "";
-  await fetchChatHistoryList().catch((error) => {
-    throw error;
-  });
+  elMenuNav.classList.add("visible");
 });
+elHeaderNewChat.addEventListener("click", onClickNewChat);
+elFormNewChat.addEventListener("click", onClickNewChat);
+elNavList.addEventListener("click", onClickListItem);
+elAsideList.addEventListener("click", onClickListItem);
 elQuestionTextarea.addEventListener("keyup", onKeyupQuestionTextarea);
 
 // 数据
@@ -154,7 +162,9 @@ const renderCurrentTitleHistoryList = () => {
     }) || [];
   for (const node of treeData) {
     const element = createTreeNode(node);
+    const copyElement = createTreeNode(node);
     elAsideList.appendChild(element);
+    elNavList.appendChild(copyElement);
   }
 };
 const renderCurrentChatHistoryList = (chatHistoryList) => {

@@ -13,26 +13,20 @@
   </head>
   <body>
     <header class="header">
-      <a href="/" class="header__anchor">
-        <h1 class="h1">聊天机器人</h1>
-        <img
-          src="assets/images/logo-name.svg"
-          alt="聊天机器人"
-          class="anchor__logo-name"
-        />
-      </a>
+      <div class="header__menu">
+        <h1 class="menu__h1">聊天机器人</h1>
 
-      <p class="header__user">
-        <span class="user__menu">菜单</span>
-        <span class="user__sign-in">注册</span>
-        <span>|</span>
-        <span class="user__login">登录</span>
-      </p>
+        <nav class="menu__nav">
+          <ul class="nav__list"></ul>
+        </nav>
+      </div>
+
+      <div class="header__new-chat"></div>
     </header>
 
     <main class="main">
       <aside class="main__aside">
-        <div class="aside__new-chat-button">新建对话</div>
+        <div class="aside__new-chat">新建对话</div>
 
         <ul class="aside__list"></ul>
       </aside>
