@@ -7,10 +7,13 @@ const elFormNewChatButton = el(`.aside__new-chat-button`);
 const elAsideList = el(`.aside__list`);
 const elMainArticle = el(`.main__article`);
 const elQuestionTextarea = el(`.question__textarea`);
-const elQuestionSubmitButton = el(`.question__submit-button`);
 
 // 事件处理
-const onClickQuestionSubmitButton = () => {
+const onKeyupQuestionTextarea = (event) => {
+  const { key, shiftKey } = event;
+  if (!(key === "Enter" && !shiftKey)) {
+    return;
+  }
   currentChatHistoryList.push({ role: 1, content: elQuestionTextarea.value });
   renderCurrentChatHistoryList([
     { role: 1, content: elQuestionTextarea.value },
@@ -25,6 +28,8 @@ const onClickQuestionSubmitButton = () => {
     renderCurrentChatHistoryList([
       { role: 2, content: "抱歉我没有理解您的问题。" },
     ]);
+    const top = 99999;
+    elMainArticle.scrollBy({ top });
   }, 1000);
 };
 
@@ -65,7 +70,7 @@ elAsideList.addEventListener("click", async (event) => {
     throw error;
   });
 });
-elQuestionSubmitButton.addEventListener("click", onClickQuestionSubmitButton);
+elQuestionTextarea.addEventListener("keyup", onKeyupQuestionTextarea);
 
 // 数据
 let currentTitleHistoryList = [];
