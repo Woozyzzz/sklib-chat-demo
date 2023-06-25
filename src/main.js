@@ -81,9 +81,14 @@ window.addEventListener("click", (event) => {
   elChatHeaderMenuNav.classList.remove("visible");
 });
 
-elChatHeaderMenu.addEventListener("click", () => {
+elChatHeaderMenu.addEventListener("click", (event) => {
+  const { target } = event;
   const { classList } = elChatHeaderMenuNav;
   if ([...classList].includes("visible")) {
+    if (target !== elChatHeaderMenu) {
+      return;
+    }
+    elChatHeaderMenuNav.classList.remove("visible");
     return;
   }
   elChatHeaderMenuNav.classList.add("visible");
