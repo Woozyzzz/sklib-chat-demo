@@ -8,7 +8,9 @@ const elChatHeaderNewChat = el(`.chat-header__new-chat`);
 const elChatMainAsideNewChat = el(`.chat-main__aside__new-chat`);
 const elChatMainAsideList = el(`.chat-main__aside__list`);
 const elChatMainMainArticle = el(`.chat-main__main__article`);
-const elChatMainMainFormQuestionTextarea = el(`.chat-main__main__form__question__textarea`);
+const elChatMainMainFormQuestionTextarea = el(
+  `.chat-main__main__form__question__textarea`
+);
 
 // 事件处理
 const onClickNewChat = () => {
@@ -32,16 +34,19 @@ const onClickListItem = async function (event) {
     : target;
   currentElListItem.classList.add("active");
   elChatMainMainArticle.innerHTML = "";
-  await fetchChatHistoryList().catch((error) => {
-    throw error;
-  });
+  // await fetchChatHistoryList().catch((error) => {
+  //   throw error;
+  // });
 };
 const onKeyupQuestionTextarea = (event) => {
   const { key, shiftKey } = event;
   if (!(key === "Enter" && !shiftKey)) {
     return;
   }
-  currentChatHistoryList.push({ role: 1, content: elChatMainMainFormQuestionTextarea.value });
+  currentChatHistoryList.push({
+    role: 1,
+    content: elChatMainMainFormQuestionTextarea.value,
+  });
   renderCurrentChatHistoryList([
     { role: 1, content: elChatMainMainFormQuestionTextarea.value },
   ]);
@@ -65,11 +70,20 @@ window.addEventListener("resize", () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 });
+window.addEventListener("click", (event) => {
+  const { target } = event;
+  if (elChatHeaderMenu === target) {
+    return;
+  }
+  if (elChatHeaderMenuNav.contains(target)) {
+    return;
+  }
+  elChatHeaderMenuNav.classList.remove("visible");
+});
 
 elChatHeaderMenu.addEventListener("click", () => {
   const { classList } = elChatHeaderMenuNav;
   if ([...classList].includes("visible")) {
-    elChatHeaderMenuNav.classList.remove("visible");
     return;
   }
   elChatHeaderMenuNav.classList.add("visible");
@@ -78,7 +92,10 @@ elChatHeaderNewChat.addEventListener("click", onClickNewChat);
 elChatMainAsideNewChat.addEventListener("click", onClickNewChat);
 elChatHeaderMenuNavList.addEventListener("click", onClickListItem);
 elChatMainAsideList.addEventListener("click", onClickListItem);
-elChatMainMainFormQuestionTextarea.addEventListener("keyup", onKeyupQuestionTextarea);
+elChatMainMainFormQuestionTextarea.addEventListener(
+  "keyup",
+  onKeyupQuestionTextarea
+);
 
 // 数据
 let currentTitleHistoryList = [];
@@ -221,12 +238,12 @@ const renderCurrentChatHistoryList = (chatHistoryList) => {
 const main = async () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
-  await fetchTitleHistoryList().catch((error) => {
-    throw error;
-  });
-  await fetchChatHistoryList().catch((error) => {
-    throw error;
-  });
+  // await fetchTitleHistoryList().catch((error) => {
+  //   throw error;
+  // });
+  // await fetchChatHistoryList().catch((error) => {
+  //   throw error;
+  // });
 };
 
 main();

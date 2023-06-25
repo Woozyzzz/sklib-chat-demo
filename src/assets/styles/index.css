@@ -59,7 +59,7 @@ html {
   .chat-header__menu
   .chat-header__menu__nav
   .chat-header__menu__nav__list {
-  max-height: 160px;
+  height: 160px;
   overflow: auto;
   border-bottom: 1px solid var(--color-level-1-border);
 }

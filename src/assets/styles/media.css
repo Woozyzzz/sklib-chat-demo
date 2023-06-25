@@ -7,6 +7,7 @@
 
   .chat-header {
     height: var(--header-height);
+    display: none;
   }
 
   .chat-header .chat-header__menu .chat-header__menu__nav {
