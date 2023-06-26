@@ -20,18 +20,46 @@
 
   .chat-main .chat-main__aside {
     padding: 16px 8px;
-    padding-bottom: 0;
     display: block;
     width: 260px;
+    color: var(--color-basic-white);
     font-size: 14px;
     background-color: var(--color-basic-black);
+  }
+
+  .chat-main .chat-main__aside .chat-main__aside__sign-in-or-up {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .chat-main .chat-main__aside .chat-main__aside__sign-in-or-up.signed-in {
+    display: none;
+  }
+
+  .chat-main
+    .chat-main__aside
+    .chat-main__aside__sign-in-or-up
+    .chat-main__aside__sign-in-or-up__logo {
+    width: 48px;
+    height: 48px;
+    background-image: url("../images/profile-plain.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .chat-main
+    .chat-main__aside
+    .chat-main__aside__sign-in-or-up
+    .chat-main__aside__sign-in-or-up__text {
+    margin-left: 4px;
   }
 
   .chat-main .chat-main__aside .chat-main__aside__new-chat {
     position: relative;
     padding: 14px 0;
     padding-left: 40px;
-    color: var(--color-basic-white);
     border: 1px solid var(--color-level-1-border);
     border-radius: 4px;
     cursor: pointer;
@@ -145,11 +173,63 @@
     width: 120px;
     overflow: hidden;
     line-height: 40px;
-    color: var(--color-basic-white);
     text-overflow: ellipsis;
     word-break: break-all;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+  }
+
+  .chat-main .chat-main__aside .chat-main__aside__bottom-list {
+    margin-top: 8px;
+    padding: 8px;
+  }
+
+  .chat-main .chat-main__aside .chat-main__aside__bottom-list .list-item {
+    position: relative;
+    padding-left: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    border-radius: 4px;
+    cursor: default;
+  }
+  .chat-main .chat-main__aside .chat-main__aside__bottom-list .list-item:hover {
+    background-color: #343540;
+  }
+  .chat-main
+    .chat-main__aside
+    .chat-main__aside__bottom-list
+    .list-item::before {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    content: "";
+    transform: translateY(-50%);
+  }
+  .chat-main
+    .chat-main__aside
+    .chat-main__aside__bottom-list
+    .list-item.sign-out::before {
+    background-image: url("../images/sign-out.png");
+  }
+  .chat-main
+    .chat-main__aside
+    .chat-main__aside__bottom-list
+    .list-item.sign-out {
+    display: none;
+  }
+  .chat-main
+    .chat-main__aside
+    .chat-main__aside__bottom-list
+    .list-item.sign-out.signed-in {
+    display: flex;
   }
 
   .chat-main .chat-main__main .chat-main__main__article {
