@@ -3,16 +3,33 @@ const el = (selector) => document.querySelector(selector);
 // 元素
 const elChatHeaderMenu = el(`.chat-header__menu`);
 const elChatHeaderMenuNav = el(`.chat-header__menu__nav`);
+const elChatHeaderMenuNavSignInOrUp = el(
+  `.chat-header__menu__nav__sign-in-or-up`
+);
 const elChatHeaderMenuNavList = el(`.chat-header__menu__nav__list`);
 const elChatHeaderNewChat = el(`.chat-header__new-chat`);
+const elChatHeaderMenuNavBottomListItemSignOut = el(
+  `.chat-header__menu__nav__bottom-list .list-item.sign-out`
+);
+const elChatMainAsideSignInOrUp = el(`.chat-main__aside__sign-in-or-up`);
 const elChatMainAsideNewChat = el(`.chat-main__aside__new-chat`);
 const elChatMainAsideList = el(`.chat-main__aside__list`);
+const elChatMainMenuAsideBottomListItemSignOut = el(
+  `.chat-main__aside__bottom-list .list-item.sign-out`
+);
 const elChatMainMainArticle = el(`.chat-main__main__article`);
 const elChatMainMainFormQuestionTextarea = el(
   `.chat-main__main__form__question__textarea`
 );
+const elChatMask = el(`.chat-mask`);
+const elChatMaskDialogHeaderClose = el(
+  `.chat-mask__dialog .dialog__header__close`
+);
 
 // 事件处理
+const onClickSignInOrUp = () => {
+  elChatMask.classList.add("visible");
+};
 const onClickNewChat = () => {
   elChatMainMainArticle.innerHTML = "";
   elChatMainMainFormQuestionTextarea.focus();
@@ -37,6 +54,10 @@ const onClickListItem = async function (event) {
   // await fetchChatHistoryList().catch((error) => {
   //   throw error;
   // });
+};
+const onClickSignOut = () => {
+  setSignInStatus("");
+  renderSignInOrUp(false);
 };
 const onKeyupQuestionTextarea = (event) => {
   const { key, shiftKey } = event;
@@ -72,10 +93,10 @@ window.addEventListener("resize", () => {
 });
 window.addEventListener("click", (event) => {
   const { target } = event;
-  if (elChatHeaderMenu === target) {
+  if (elChatMask.classList.contains("visible")) {
     return;
   }
-  if (elChatHeaderMenuNav.contains(target)) {
+  if (elChatHeaderMenu === target || elChatHeaderMenuNav.contains(target)) {
     return;
   }
   elChatHeaderMenuNav.classList.remove("visible");
@@ -83,8 +104,7 @@ window.addEventListener("click", (event) => {
 
 elChatHeaderMenu.addEventListener("click", (event) => {
   const { target } = event;
-  const { classList } = elChatHeaderMenuNav;
-  if ([...classList].includes("visible")) {
+  if (elChatHeaderMenuNav.classList.contains("visible")) {
     if (target !== elChatHeaderMenu) {
       return;
     }
@@ -93,14 +113,31 @@ elChatHeaderMenu.addEventListener("click", (event) => {
   }
   elChatHeaderMenuNav.classList.add("visible");
 });
-elChatHeaderNewChat.addEventListener("click", onClickNewChat);
-elChatMainAsideNewChat.addEventListener("click", onClickNewChat);
+elChatHeaderMenuNavSignInOrUp.addEventListener("click", onClickSignInOrUp);
 elChatHeaderMenuNavList.addEventListener("click", onClickListItem);
+elChatHeaderNewChat.addEventListener("click", onClickNewChat);
+elChatHeaderMenuNavBottomListItemSignOut.addEventListener(
+  "click",
+  onClickSignOut
+);
+elChatMainAsideSignInOrUp.addEventListener("click", onClickSignInOrUp);
+elChatMainAsideNewChat.addEventListener("click", onClickNewChat);
 elChatMainAsideList.addEventListener("click", onClickListItem);
+elChatMainMenuAsideBottomListItemSignOut.addEventListener(
+  "click",
+  onClickSignOut
+);
 elChatMainMainFormQuestionTextarea.addEventListener(
   "keyup",
   onKeyupQuestionTextarea
 );
+elChatMaskDialogHeaderClose.addEventListener("click", () => {
+  elChatMask.classList.remove("visible");
+
+  // 模拟登录
+  setSignInStatus("admin");
+  renderSignInOrUp(true);
+});
 
 // 数据
 let currentTitleHistoryList = [];
@@ -155,6 +192,22 @@ const createTreeNode = (node) => {
     }
   }
   return element;
+};
+// 获取登录状态
+const getSignInStatus = () => {
+  const signedIn = localStorage.getItem("signedIn") || "";
+  if (!signedIn) {
+    return false;
+  }
+  return true;
+};
+// 设置登录状态
+const setSignInStatus = (signedIn) => {
+  if (!signedIn) {
+    localStorage.removeItem("signedIn");
+    return;
+  }
+  localStorage.setItem("signedIn", signedIn);
 };
 
 // 渲染方法
@@ -238,11 +291,33 @@ const renderCurrentChatHistoryList = (chatHistoryList) => {
     elChatMainMainArticle.appendChild(element);
   }
 };
+const renderSignInOrUp = (toggle = true) => {
+  const signedInClassName = "signed-in";
+  if (!toggle) {
+    elChatHeaderMenuNavSignInOrUp.classList.remove(signedInClassName);
+    elChatMainAsideSignInOrUp.classList.remove(signedInClassName);
+    elChatHeaderMenuNavBottomListItemSignOut.classList.remove(
+      signedInClassName
+    );
+    elChatMainMenuAsideBottomListItemSignOut.classList.remove(
+      signedInClassName
+    );
+    return;
+  }
+  elChatHeaderMenuNavSignInOrUp.classList.add(signedInClassName);
+  elChatMainAsideSignInOrUp.classList.add(signedInClassName);
+  elChatHeaderMenuNavBottomListItemSignOut.classList.add(signedInClassName);
+  elChatMainMenuAsideBottomListItemSignOut.classList.add(signedInClassName);
+};
 
 // 主函数
 const main = async () => {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
+  if (!getSignInStatus()) {
+    return;
+  }
+  renderSignInOrUp(true);
   // await fetchTitleHistoryList().catch((error) => {
   //   throw error;
   // });

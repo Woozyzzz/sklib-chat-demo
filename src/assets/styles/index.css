@@ -227,7 +227,7 @@ html {
   align-items: center;
   height: 40px;
   border-radius: 4px;
-  cursor: default;
+  cursor: pointer;
 }
 .chat-header
   .chat-header__menu
@@ -257,15 +257,15 @@ html {
   .chat-header__menu
   .chat-header__menu__nav
   .chat-header__menu__nav__bottom-list
-  .list-item.sign-out::before {
-  background-image: url("../images/sign-out.png");
+  .list-item.sign-out {
+  display: none;
 }
 .chat-header
   .chat-header__menu
   .chat-header__menu__nav
   .chat-header__menu__nav__bottom-list
-  .list-item.sign-out {
-  display: none;
+  .list-item.sign-out::before {
+  background-image: url("../images/sign-out.png");
 }
 .chat-header
   .chat-header__menu
